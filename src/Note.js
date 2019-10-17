@@ -27,7 +27,7 @@ function deleteNote(noteId, callback){
 
 export default class Note extends Component {
 
-  static contextType= UserContext;
+  static contextType = UserContext;
   
   render() {
       let linkDest = '/folder/' + this.props.folderId + '/note/' + this.props.id

@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
-import Note from './Note'
-import UserContext from './UserContext'
-import { Link } from 'react-router-dom'
-import './css/NoteList.css'
+import React, { Component } from 'react';
+import Note from './Note';
+import UserContext from './UserContext';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import './css/NoteList.css';
 
 export default class NoteList extends Component {
   static contextType = UserContext
@@ -40,4 +41,9 @@ export default class NoteList extends Component {
       </div>
     )
   }
+}
+
+NoteList.propTypes = {
+  selectedId: PropTypes.string,
+  selectedNote: PropTypes.string
 }

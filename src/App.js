@@ -6,6 +6,7 @@ import FolderView from './FolderView';
 import NoteView from './NoteView';
 import AddFolder from './AddFolder';
 import AddNote from './AddNote';
+import HandleErrors from './HandleErrors';
 import './dummy-store';
 import './css/App.css';
 import UserContext from './UserContext';
@@ -98,19 +99,21 @@ class App extends Component {
         addFolder: this.addFolder,
         addNote: this.addNote
       }}>
-        <main className='App'>
-          <Route path='' component={Header} />
-          <Switch>
-            <Route path='/addNote' component={AddNote} />
-            <Route path='/addFolder' component={AddFolder} />
-            <Route path='/folder/:folderid/note/:noteid/' render={(props) => <><NoteView {...props}/></>}/>
-            <Route path='/folder/:folderid/' render={(props)=> {
-              return <FolderView {...props}/>}} />
-            <Route exact path='/' render={(props)=> {
-              return <Mainpage {...props}/>
-            }} />
-          </Switch>
-        </main>
+        <HandleErrors>
+          <main className='App'>
+            <Route path='' component={Header} />
+            <Switch>
+              <Route path='/addNote' component={AddNote} />
+              <Route path='/addFolder' component={AddFolder} />
+              <Route path='/folder/:folderid/note/:noteid/' render={(props) => <><NoteView {...props}/></>}/>
+              <Route path='/folder/:folderid/' render={(props)=> {
+                return <FolderView {...props}/>}} />
+              <Route exact path='/' render={(props)=> {
+                return <Mainpage {...props}/>
+              }} />
+            </Switch>
+          </main>
+        </HandleErrors>
       </UserContext.Provider>
     );
   }

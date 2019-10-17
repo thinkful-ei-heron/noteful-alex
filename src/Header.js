@@ -6,7 +6,7 @@ export default class Header extends Component {
   render() {
     return (
       <div className="header">
-        <Link to='/'><h1>Noteful</h1></Link>
+        <Link style={{ textDecoration: 'none' }}to='/'><h1>Noteful</h1></Link>
       </div>
     )
   }

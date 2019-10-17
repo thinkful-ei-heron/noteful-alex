@@ -10,7 +10,7 @@ class AddFolder extends Component {
     folder: {name: ''}
   };
 
-  setFolder = name => {
+  setFolder = (name) => {
     this.setState({folder: name})
   };
 

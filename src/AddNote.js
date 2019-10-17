@@ -105,10 +105,13 @@ class AddNote extends Component {
           <Link to='/' type='submit' 
             onClick={e => {
               e.preventDefault()
+              if(this.state.note.name.length > 0 && this.state.note.folderId.length > 0){
               this.handleCreateNote(
                 this.context.addNote
               )
-              this.props.history.push('/')}}>
+              this.props.history.push('/')}  
+            }
+          }>
                 Submit
           </Link>
         

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import FolderList from './FolderList';
 import NoteList from './NoteList';
-import './css/Mainpage.css'
+import PropTypes from 'prop-types';
+import './css/Mainpage.css';
 
 export default class Mainpage extends Component {
   render() {
@@ -12,4 +13,9 @@ export default class Mainpage extends Component {
       </div>
     )
   }
+}
+
+Mainpage.propTypes = {
+  folders: PropTypes.array,
+  notes: PropTypes.array
 }

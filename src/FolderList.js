@@ -18,7 +18,7 @@ export default class FolderList extends Component {
         {folders.map(folder =>
           <Folder id={folder.id} key={folder.id} name={folder.name}/>
         )}
-        {this.props.selectedNote ? <></> : <Link to='/addFolder' className="add-folder">Add Folder</Link>}
+        {this.props.selectedNote ? <></> : <Link to='/addFolder' className="add-folder" style={{ textDecoration: 'none' }}>Add Folder</Link>}
       </div>
     )
   }

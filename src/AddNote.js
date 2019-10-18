@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from './UserContext';
+import './css/AddNote.css';
 
 class AddNote extends Component {
 
@@ -28,13 +29,13 @@ class AddNote extends Component {
     const newNote = this.state.note
     newNote.content = input
     this.setState({ note: newNote })
-  }
+  };
 
   setNoteFolderId = (input) => {
     const newNote = this.state.note
     newNote.folderId = input
     this.setState({ note: newNote })
-  }
+  };
 
   handleCreateNote = (addNote) => {
     const input = this.state.note
@@ -83,39 +84,40 @@ class AddNote extends Component {
     
   render() {
     return(
-      <form>
-        <label htmlFor='note'>Note Name
-        <p className='error'>{this.validateName()}</p></label>
-        <input id='name' type='text' value={this.state.note.name} required
-          onChange={e =>  {
-            this.setNoteName(e.target.value)
-          }} 
-          />
-        <input id='content' type='text' value={this.state.note.content} 
-          onChange={e => this.setNoteContent(e.target.value)}/>
-          <p>{this.validateFolder()}</p>
-        <select id='folderId'
-          onChange={e => this.setNoteFolderId(e.target.value)}>
-            
-            <option value=''>Choose a Folder</option>
-          {this.context.folders.map(index => 
-            <option key={index.id} value={index.id}>{index.name}</option>  
-          )}
-        </select>
-          <Link to='/' type='submit' 
-            onClick={e => {
-              e.preventDefault()
-              if(this.state.note.name.length > 0 && this.state.note.folderId.length > 0){
-              this.handleCreateNote(
-                this.context.addNote
-              )
-              this.props.history.push('/')}  
-            }
-          }>
-                Submit
-          </Link>
-        
-      </form>
+      <div className='add-note-form'>
+        <form className='folder-form'>
+          <label htmlFor='note'>Note Name
+          <p className='error'>{this.validateName()}</p></label>
+          <input placeholder='Note Name' id='name' type='text' value={this.state.note.name} required
+            onChange={e =>  {
+              this.setNoteName(e.target.value)
+            }} 
+            />
+          <textarea placeholder='Note Content' id='content' type='text' value={this.state.note.content} 
+            onChange={e => this.setNoteContent(e.target.value)}/>
+            <p className='error'>{this.validateFolder()}</p>
+          <select id='folderId'
+            onChange={e => this.setNoteFolderId(e.target.value)}>
+              
+              <option value=''>Choose a Folder</option>
+            {this.context.folders.map(index => 
+              <option key={index.id} value={index.id}>{index.name}</option>  
+            )}
+          </select>
+            <Link className='note-create-button' to='/' type='submit' 
+              onClick={e => {
+                e.preventDefault()
+                if(this.state.note.name.length > 0 && this.state.note.folderId.length > 0){
+                this.handleCreateNote(
+                  this.context.addNote
+                )
+                this.props.history.push('/')}  
+              }
+            }>
+                  Submit
+            </Link>
+        </form>
+      </div>
     )
   }
 }

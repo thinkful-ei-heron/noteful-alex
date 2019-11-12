@@ -9,10 +9,10 @@ class AddNote extends Component {
 
   state = {
     note: {
-      name: '',
+      note_name: '',
       content: '',
-      folderId: '',
-      modified: ''
+      folder_id: '',
+      date_created: ''
     },
     validateFolder: false,
     validateName: false
@@ -20,8 +20,8 @@ class AddNote extends Component {
 
   setNoteName = (input) => {
     const newNote = this.state.note
-    newNote.name = input
-    newNote.modified = new Date()
+    newNote.note_name = input
+    newNote.date_created = new Date()
     this.setState({ note: newNote })
   };
 
@@ -33,22 +33,24 @@ class AddNote extends Component {
 
   setNoteFolderId = (input) => {
     const newNote = this.state.note
-    newNote.folderId = input
+    newNote.folder_id = input
     this.setState({ note: newNote })
   };
 
   handleCreateNote = (addNote) => {
+    console.log(this.state.note.folder_id)
     const input = this.state.note
-    const data = JSON.stringify({
-      name: `${input.name}`,
-      content: `${input.content}`,
-      folderId: `${input.folderId}`,
-      modified: `${input.modified}`
-  })
-    fetch(`http://localhost:9090/notes`, {
+    const data = {
+      note_name: input.note_name,
+      content: input.content,
+      folder_id: input.folder_id,
+      date_created: input.date_created
+  }
+    console.log(JSON.stringify(data))
+    fetch(`http://localhost:8000/api/notes`, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: data
+      headers: {'content-type': 'application/json'},
+      body: JSON.stringify(data)
     })
     .then(res => {
       if(!res.ok){
@@ -57,9 +59,7 @@ class AddNote extends Component {
       return res.json()
     })
     .then(data => {
-      console.log(data.name)
-      console.log(data.id)
-      addNote(data.name, data.content, data.modified, data.folderId, data.id)
+      this.context.addNote(data.note_name, data.content, data.date_created, data.folder_id, data.id)
       return data
     })
     .catch(error => {
@@ -68,27 +68,27 @@ class AddNote extends Component {
     };
 
     validateName = () => {
-      let name = this.state.note.name;
+      let name = this.state.note.note_name;
       if(name.length === 0) {
-        console.log(name)
         return 'Note Name Must Be Created';
       }
     }
     
     validateFolder = () => {
-      let folder = this.state.note.folderId
+      let folder = this.state.note.folder_id
       if(folder.length === 0) {
         return 'Please choose a folder...'
       }
     }
     
   render() {
+    console.log(this.context)
     return(
       <div className='add-note-form'>
         <form className='folder-form'>
           <label htmlFor='note'>Note Name
           <p className='error'>{this.validateName()}</p></label>
-          <input placeholder='Note Name' id='name' type='text' value={this.state.note.name} required
+          <input placeholder='Note Name' id='name' type='text' value={this.state.note.note_name} required
             onChange={e =>  {
               this.setNoteName(e.target.value)
             }} 
@@ -101,13 +101,13 @@ class AddNote extends Component {
               
               <option value=''>Choose a Folder</option>
             {this.context.folders.map(index => 
-              <option key={index.id} value={index.id}>{index.name}</option>  
+              <option key={index.id} value={index.id}>{index.folderName}</option>  
             )}
           </select>
             <Link className='note-create-button' to='/' type='submit' 
               onClick={e => {
                 e.preventDefault()
-                if(this.state.note.name.length > 0 && this.state.note.folderId.length > 0){
+                if(this.state.note.note_name.length > 0 && this.state.note.folder_id.length > 0){
                 this.handleCreateNote(
                   this.context.addNote
                 )

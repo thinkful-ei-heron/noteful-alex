@@ -12,27 +12,28 @@ export default class NoteList extends Component {
     let notes = this.context.notes
 
     if(this.props.selectedNote){
-      notes = notes.filter(note => note.id === this.props.selectedNote)
+      notes = notes.filter(note => note.id === parseInt(this.props.selectedNote))
 
     }else {
     if(this.props.selectedId){
-      notes = notes.filter(note => note.folderId === this.props.selectedId)
+      console.log(this.props.selectedId)
+      notes = notes.filter(note => note.folder_id === parseInt(this.props.selectedId))
     }
     else{
       notes = this.context.notes
     }
   }
-
+  console.log(notes)
     return (
       <div className="notelist">
         <div>
           {
             notes.map(note => 
               <Note key={note.id}
-              id={note.id}
-              name={note.name}
-              modified={note.modified}
-              folderId={note.folderId}
+              id={note.id.toString()}
+              name={note.note_name}
+              modified={note.date_created}
+              folderId={note.folder_id.toString()}
               content={note.content}
               selectedNote={this.props.selectedNote} />)
             }

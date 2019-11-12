@@ -11,8 +11,8 @@ import './dummy-store';
 import './css/App.css';
 import UserContext from './UserContext';
 
-const folderUrl= 'http://localhost:9090/folders';
-const notesUrl='http://localhost:9090/notes';
+const folderUrl= 'http://localhost:8000/api/folders';
+const notesUrl='http://localhost:8000/api/notes';
 
 class App extends Component {
 
@@ -22,8 +22,9 @@ class App extends Component {
   }
 
   deleteNote = noteId =>{
+    console.log(this.state)
     const newNotes = this.state.notes.filter(item =>
-      item.id !== noteId
+      item.id !== parseInt(noteId)
       )
       this.setState({
         notes: newNotes
@@ -42,11 +43,11 @@ class App extends Component {
 
   addNote = (name, content, modified, folderId, id) => {
     const noteToAdd = [{
-      name: name,
+      note_name: name,
       content: content,
       id: id,
-      modified: modified,
-      folderId: folderId
+      date_created: modified,
+      folder_id: folderId
     }]
     this.setState({
       notes: this.state.notes.concat(noteToAdd)
@@ -63,7 +64,8 @@ class App extends Component {
       })
       .then(res => this.setState({
         folders: res,
-      }))
+      })
+      )
       .catch(error => console.log(error.message));
   }
 
@@ -77,7 +79,8 @@ class App extends Component {
       })
       .then(res => this.setState({
         notes: res,
-      }))
+      })
+      )
       .catch(error => console.log(error.message));
   }
 

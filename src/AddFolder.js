@@ -19,10 +19,10 @@ class AddFolder extends Component {
 
   handleCreateFolder = (addFolder) => {
     const input = this.state.folder.name
-    const data = JSON.stringify({name: `${input}`})
-    fetch(`http://localhost:9090/folders`, {
+    const data = JSON.stringify({folder_name: `${input}`})
+    fetch(`http://localhost:8000/api/folders`, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {'content-type': 'application/json'},
       body: data
     })
     .then(res => {
@@ -32,7 +32,7 @@ class AddFolder extends Component {
       return res.json()
     })
     .then(data => {
-      console.log(data.name)
+      console.log(data.folder_name)
       console.log(data.id)
       addFolder(data.name, data.id)
       return data

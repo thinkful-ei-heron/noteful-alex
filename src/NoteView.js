@@ -5,6 +5,8 @@ import './css/NoteView.css';
 
 export default class NoteView extends Component {
 
+  
+
   render() {
     return (
       <div className='main-elements'>

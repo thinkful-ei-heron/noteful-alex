@@ -11,12 +11,12 @@ export default class FolderList extends Component {
   render() {
     let folders = this.context.folders;
     if(this.props.selectedNote){
-      folders = folders.filter(folder => folder.id === this.props.selectedId)
+      folders = folders.filter(folder => folder.id === parseInt(this.props.selectedId))
     }
     return (
       <div className="folderlist">
         {folders.map(folder =>
-          <Folder id={folder.id} key={folder.id} name={folder.name}/>
+          <Folder id={folder.id.toString()} key={folder.id} name={folder.folderName}/>
         )}
         {this.props.selectedNote ? <></> : <Link to='/addFolder' className="add-folder" style={{ textDecoration: 'none' }}>Add Folder</Link>}
       </div>

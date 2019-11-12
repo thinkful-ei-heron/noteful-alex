@@ -5,17 +5,19 @@ import PropTypes from 'prop-types';
 import './css/Note.css';
 
 function deleteNote(noteId, callback){
-  fetch(`http://localhost:9090/notes/${noteId}`, {
+  console.log(noteId)
+  fetch(`http://localhost:8000/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
       },
   })
   .then(res => {
+    console.log(res)
     if(!res.ok){
       throw new Error(res.status)
     }
-    return res.json()
+    return
   })
   .then(data =>{
     callback(noteId)
@@ -29,7 +31,7 @@ function deleteNote(noteId, callback){
 export default class Note extends Component {
 
   static contextType = UserContext;
-  
+ 
   render() {
       let linkDest = '/folder/' + this.props.folderId + '/note/' + this.props.id
       return (
@@ -59,6 +61,6 @@ Note.propTypes = {
   id: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   selectedNote: PropTypes.string,
-  folderId: PropTypes.string.isRequired,
-  modified: PropTypes.string.isRequired
+  folderId: PropTypes.string,
+  modified: PropTypes.string
 }

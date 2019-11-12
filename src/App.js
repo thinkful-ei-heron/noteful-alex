@@ -10,9 +10,10 @@ import HandleErrors from './HandleErrors';
 import './dummy-store';
 import './css/App.css';
 import UserContext from './UserContext';
+import API_ENDPOINT from './config';
 
-const folderUrl= 'http://localhost:8000/api/folders';
-const notesUrl='http://localhost:8000/api/notes';
+const folderUrl= `${API_ENDPOINT}/api/folders`;
+const notesUrl=`${API_ENDPOINT}/api/notes`;
 
 class App extends Component {
 

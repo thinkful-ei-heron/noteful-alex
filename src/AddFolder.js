@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from './UserContext';
 import './css/AddFolder.css';
+import API_ENDPOINT from './config';
 
 class AddFolder extends Component {
 
@@ -20,7 +21,7 @@ class AddFolder extends Component {
   handleCreateFolder = (addFolder) => {
     const input = this.state.folder.name
     const data = JSON.stringify({folder_name: `${input}`})
-    fetch(`http://localhost:8000/api/folders`, {
+    fetch(`${API_ENDPOINT}/api/folders`, {
       method: 'POST',
       headers: {'content-type': 'application/json'},
       body: data

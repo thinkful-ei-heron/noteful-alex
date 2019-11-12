@@ -3,11 +3,11 @@ import UserContext from './UserContext';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './css/Note.css';
-import API_ENDPOINT from './config';
+import config from './config';
 
 function deleteNote(noteId, callback){
   console.log(noteId)
-  fetch(`${API_ENDPOINT}/api/notes/${noteId}`, {
+  fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'

@@ -10,10 +10,10 @@ import HandleErrors from './HandleErrors';
 import './dummy-store';
 import './css/App.css';
 import UserContext from './UserContext';
-import API_ENDPOINT from './config';
+import config from './config';
 
-const folderUrl= `${API_ENDPOINT}/api/folders`;
-const notesUrl=`${API_ENDPOINT}/api/notes`;
+const folderUrl= `${config.API_ENDPOINT}/api/folders`;
+const notesUrl=`${config.API_ENDPOINT}/api/notes`;
 
 class App extends Component {
 
@@ -33,8 +33,9 @@ class App extends Component {
   }
 
   addFolder = (folderName, folderId) => {
+    console.log(this.state.folders)
     const folderToAdd = [{
-      name: folderName,
+      folderName: folderName,
       id: folderId
     }]
     this.setState({

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from './UserContext';
 import './css/AddNote.css';
-import API_ENDPOINT from './config';
+import config from './config';
 
 class AddNote extends Component {
 
@@ -48,7 +48,7 @@ class AddNote extends Component {
       date_created: input.date_created
   }
     console.log(JSON.stringify(data))
-    fetch(`${API_ENDPOINT}/api/notes`, {
+    fetch(`${config.API_ENDPOINT}/api/notes`, {
       method: 'POST',
       headers: {'content-type': 'application/json'},
       body: JSON.stringify(data)

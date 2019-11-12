@@ -16,14 +16,12 @@ export default class NoteList extends Component {
 
     }else {
     if(this.props.selectedId){
-      console.log(this.props.selectedId)
       notes = notes.filter(note => note.folder_id === parseInt(this.props.selectedId))
     }
     else{
       notes = this.context.notes
     }
   }
-  console.log(notes)
     return (
       <div className="notelist">
         <div>
